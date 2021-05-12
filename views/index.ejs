@@ -1,13 +1,70 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-    <style>
 
-    </style>
-</head>
-<body>
+<style>
+    #calendar, .day, .month{
+        border-radius: 1rem;
+        border-width: medium;
+        border-style: solid;
+        background-color: white;
+    }
+    .day{
+        width: 10rem;
+        height: 7rem;
+        background-color: khaki;
+        padding: 0.5rem;
+    }
+    .week{
+        display: flex;
+    }
+    #calendar{
+        background-color: black;
+        width: fit-content;
+    }
+    .month{
+        padding: 1rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    h3, h2{
+        margin: 0;
+    }
+    .weekend{
+        background-color: lightskyblue!important;
+    }
+    .offset{
+        background-color: white!important;
+    }
+    .dropdown {
+        position: relative;
+        display: inline-block;
+    }
 
-</body>
-</html>
+    .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: #f9f9f9;
+        min-width: max-content;
+        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+        padding: 12px 16px;
+        z-index: 1;
+        left: 50% !important;
+        right: auto !important;
+        text-align: center !important;
+        transform: translate(-50%, 0) !important;
+        border-radius: 1rem;
+    }
+
+    .dropdown:hover .dropdown-content {
+        display: block;
+    }
+
+    .center{
+        text-align: center;
+    }
+</style>
+<div id="calendar">
+    <div class="month">
+        <h1 id="month-year"><%= monthName %> <%= year %></h1>
+    </div>
+    <%- weeks %>
+</div>

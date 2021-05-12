@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        #calendar, .day, .month{
+            border-radius: 1rem;
+            border-width: medium;
+            border-style: solid;
+            background-color: white;
+        }
+        .day{
+            width: 10rem;
+            height: 7rem;
+        }
+        .week{
+            display: flex;
+        }
+        #calendar{
+            background-color: black;
+            width: fit-content;
+        }
+        .month{
+            padding: 1rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .arrow{
+            width: 3rem;
+            height: 3rem;
+        }
+        h3{
+            margin: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+<div id="calendar">
+    <div class="month">
+        <h1 id="month-year"></h1>
+    </div>
+    <script>
+    const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
+
+    var qry = window.location.search
+    var urlQry = new URLSearchParams(qry)
+    var date = new Date(urlQry.get('year'), urlQry.get('month'))
+    document.getElementById("month-year").innerText = `${months[date.getMonth()]} ${date.getFullYear()}`
+    setCal()
+
+    function setCal(){
+        let calendar = document.getElementById("calendar")
+        let week = createElement("week")
+        let day = createElement("day")
+        let currentWeek = 0
+        setOffset(week, day)
+        setDays(week, day, calendar)
+        while(week.childElementCount < 7){
+            week.innerHTML += day.outerHTML
+        }
+        calendar.innerHTML += week.outerHTML
+    }
+
+    function createElement(name){
+        let element = document.createElement("DIV")
+        element.className = name
+        return element
+    }
+
+    function setOffset(week, day){
+        for (let i = 0; i < date.getDay(); i++) {
+            week.innerHTML += day.outerHTML
+        }
+    }
+
+    function setDays(week, day, calendar){
+        let last = new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate()
+        for (let i = 1; i <= last; i++) {
+            day.innerHTML = `<h3>${i}</h3>`
+            week.innerHTML += day.outerHTML
+            if(week.childElementCount >= 7){
+                calendar.innerHTML += week.outerHTML
+                week.innerHTML = ""
+            }
+        }
+        day.innerHTML = ""
+    }
+    </script>
+</div>
+</body>
+</html>
