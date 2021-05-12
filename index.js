@@ -2,6 +2,7 @@ const express = require("express")
 const path = require("path")
 const app = express()
 const ejs = require("ejs")
+const port = process.env.PORT || 3000
 
 app.use(express.urlencoded({extended: true}))
 app.set("view engine", "ejs")
@@ -113,6 +114,6 @@ const render = (file, data) => {
     })
 }
 
-app.listen(3000, () => {
+app.listen(port, () => {
     console.log("Express is running...")
 })
